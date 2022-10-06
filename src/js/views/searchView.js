@@ -9,6 +9,14 @@ export const clearResults = ()=> {
     elements.searchResPages.innerHTML = '';  
 }  
 
+export const activeLinkStyle = (id) =>{
+    const resArr = [...document.querySelectorAll('.results__link')];
+
+    resArr.forEach(el => el.classList.remove('results__link--active'))
+
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active');
+}
+
 const converTitle = (title, limit = 17) =>{
     const newTitle = [];
     if(title.length > limit){
@@ -26,7 +34,7 @@ const converTitle = (title, limit = 17) =>{
 const renderRecipe = (recipe) =>{
     const markup = `
     <li>
-        <a class="results__link results__link" href="#${recipe.recipe_id}">
+        <a class="results__link" href="#${recipe.recipe_id}">
         <figure class="results__fig">
             <img src="${recipe.image_url}" alt="${recipe.title}">
         </figure>
@@ -38,8 +46,7 @@ const renderRecipe = (recipe) =>{
     </li>
     `;
  
-    elements.searchResList.insertAdjacentHTML('beforeend', markup)
-    console.log(markup)
+    elements.searchResList.insertAdjacentHTML('beforeend', markup) 
 }
     const createButton = (page, type) => {
         return `
